@@ -215,9 +215,15 @@ public class StuSpringdataApplication implements CommandLineRunner {
 	}
 
 	private void buscarPorSpecification() {
-		List<Funcionario> funcionarios = this.funcionarioRepository.findAll(Specification.where(FuncionarioSpecification.nome("a")));
+		String cpf = null;
+		BigDecimal salario = new BigDecimal("5000");
+		LocalDate dataDaContratacao = null;
+		String nome = null;
+
+		List<Funcionario> funcionarios = this.funcionarioRepository
+				.findAll(Specification.where(FuncionarioSpecification.nome(nome)).or(FuncionarioSpecification.cpf(cpf))
+						.or(FuncionarioSpecification.salario(salario)).or(FuncionarioSpecification.dataDaContratacao(dataDaContratacao)));
+
 		funcionarios.forEach(f -> System.out.println(f.getNome()));
-
 	}
-
 }
